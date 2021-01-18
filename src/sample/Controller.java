@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,7 +36,10 @@ public class Controller {
 
     public int incrementIndex = 0;
     public int score = 0;
-    public int remainingSeconds = 15;
+    public int seconds = 59;
+    public int minutes = 4;
+    public Timer timer;
+    public TimerTask timerTask;
 
     String[] questions = {
             "JAVA est un langage",
@@ -108,6 +113,30 @@ public class Controller {
         answer3.setStyle("-fx-background-color: #D3D3D3");
     }
 
+    @FXML
+    private void initialize() {
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            public void run() {
+                Platform.runLater(() -> {
+
+                    if (seconds == 0) {
+                        minutes--;
+                        seconds = 59;
+                    }
+                    seconds--;
+                    DecimalFormat decimalFormat = new DecimalFormat("00");
+                    String secondFormat = decimalFormat.format(seconds);
+                    String minuteFormat = decimalFormat.format(minutes);
+                    timerLabel.setText(minuteFormat + " : " + secondFormat);
+
+
+                });
+            }
+        };
+
+        timer.schedule(timerTask,0, 1000);
+    }
 
     @FXML
     private void handleClickEvent(ActionEvent actionEvent) throws IOException {
@@ -170,10 +199,6 @@ public class Controller {
             answer3.setText("");
             answer3.setVisible(false);
         }
-    }
-
-    public void setScene(String sceneName) {
-
     }
 
 }
