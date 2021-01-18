@@ -1,0 +1,29 @@
+#containerFail {
+    -fx-background-color: tomato;
+    -fx-font-size: 32;
+    -fx-font-weight: 600;
+}
+
+#containerWin {
+    -fx-background-color: #00FF00;
+    -fx-font-size: 32;
+    -fx-font-weight: 600;
+}
+
+#loseLabel {
+    -fx-text-fill: white;
+    -fx-padding: 0 0 25 0;
+}
+
+#luckLabel {
+     -fx-text-fill: white;
+}
+
+#congLabel {
+     -fx-text-fill: white;
+     -fx-padding: 0 0 25 0;
+}
+
+#winLabel {
+    -fx-text-fill: white;
+}
